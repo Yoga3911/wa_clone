@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/themes/app_color.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
+  final int _tabLength = 4;
+  final int _index = 0;
+
+  late final TabController _tabController = TabController(
+    length: _tabLength,
+    vsync: this,
+  );
+
+  _onPageChanged(idx) {
+    _tabController.index = idx;
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
-      initialIndex: 0,
+      length: _tabLength,
+      initialIndex: _index,
       child: Scaffold(
         appBar: _appBar(context),
         floatingActionButton: _floatingActionButton(),
@@ -34,6 +59,8 @@ class MainScreen extends StatelessWidget {
     return TabBar(
       physics: const NeverScrollableScrollPhysics(),
       isScrollable: true,
+      controller: _tabController,
+      onTap: _onPageChanged,
       indicatorColor: AppColor.green1,
       tabs: [
         SizedBox(
@@ -48,14 +75,16 @@ class MainScreen extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text("Chats"),
-                SizedBox(width: 5),
+              children: [
+                const Text("Chats"),
+                const SizedBox(width: 5),
                 CircleAvatar(
-                  backgroundColor: AppColor.green1,
+                  backgroundColor: _tabController.index == 1
+                      ? AppColor.green1
+                      : AppColor.grey1,
                   radius: 10,
-                  child: Text(
-                    "0",
+                  child: const Text(
+                    "4",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.black,
@@ -72,11 +101,13 @@ class MainScreen extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text("Status"),
-                SizedBox(width: 5),
+              children: [
+                const Text("Status"),
+                const SizedBox(width: 5),
                 CircleAvatar(
-                  backgroundColor: AppColor.green1,
+                  backgroundColor: _tabController.index == 2
+                      ? AppColor.green1
+                      : AppColor.grey1,
                   radius: 4,
                 )
               ],
@@ -98,10 +129,12 @@ class MainScreen extends StatelessWidget {
       IconButton(
         onPressed: () {},
         icon: const Icon(Icons.search_rounded),
+        splashRadius: 20,
       ),
       IconButton(
         onPressed: () {},
         icon: const Icon(Icons.more_vert_rounded),
+        splashRadius: 20,
       ),
     ];
   }
