@@ -44,14 +44,43 @@ class MainScreen extends StatelessWidget {
         ),
         SizedBox(
           width: size.width / 5,
-          child: const Tab(
-            text: "Chats",
+          child: Tab(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text("Chats"),
+                SizedBox(width: 5),
+                CircleAvatar(
+                  backgroundColor: AppColor.green1,
+                  radius: 10,
+                  child: Text(
+                    "0",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         SizedBox(
           width: size.width / 5,
-          child: const Tab(
-            text: "Status",
+          child: Tab(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text("Status"),
+                SizedBox(width: 5),
+                CircleAvatar(
+                  backgroundColor: AppColor.green1,
+                  radius: 4,
+                )
+              ],
+            ),
           ),
         ),
         SizedBox(

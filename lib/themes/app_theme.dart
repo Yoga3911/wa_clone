@@ -18,7 +18,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColor.grey3,
     tabBarTheme: const TabBarTheme(
       unselectedLabelColor: AppColor.grey1,
-      labelColor: Colors.white,
+      labelColor: AppColor.green1,
     ),
   );
 }
