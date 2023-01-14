@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/dummy/chats.dart';
+import 'package:whatsapp/screens/chat/chat.dart';
 import 'package:whatsapp/themes/app_color.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,6 +15,9 @@ class _MainScreenState extends State<MainScreen>
   final int _tabLength = 4;
   final int _index = 0;
 
+  late final List<Widget> _screens = [
+    const ChatScreen(),
+  ];
   late final TabController _tabController = TabController(
     length: _tabLength,
     vsync: this,
@@ -37,6 +42,10 @@ class _MainScreenState extends State<MainScreen>
       child: Scaffold(
         appBar: _appBar(context),
         floatingActionButton: _floatingActionButton(),
+        body: IndexedStack(
+          index: _tabController.index,
+          children: _screens,
+        ),
       ),
     );
   }
@@ -83,9 +92,9 @@ class _MainScreenState extends State<MainScreen>
                       ? AppColor.green1
                       : AppColor.grey1,
                   radius: 10,
-                  child: const Text(
-                    "4",
-                    style: TextStyle(
+                  child: Text(
+                    chatData.length.toString(),
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
@@ -126,6 +135,11 @@ class _MainScreenState extends State<MainScreen>
 
   List<Widget> _actions() {
     return <Widget>[
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.camera_alt_outlined),
+        splashRadius: 20,
+      ),
       IconButton(
         onPressed: () {},
         icon: const Icon(Icons.search_rounded),
