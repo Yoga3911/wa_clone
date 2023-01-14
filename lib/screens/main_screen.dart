@@ -64,6 +64,7 @@ class _MainScreenState extends State<MainScreen>
         ),
         bottom: _tabBar(context),
         actions: _actions(),
+        elevation: 0,
       );
 
   PreferredSizeWidget _tabBar(BuildContext context) {
