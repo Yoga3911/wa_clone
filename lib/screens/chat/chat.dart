@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp/dummy/chats.dart';
+import 'package:whatsapp/dummy/chat.dart';
 import 'package:whatsapp/screens/chat/widgets/chat_tile.dart';
 
 class ChatScreen extends StatelessWidget {
