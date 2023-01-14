@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/dummy/chats.dart';
 import 'package:whatsapp/screens/chat/chat.dart';
+import 'package:whatsapp/screens/community/community.dart';
 import 'package:whatsapp/themes/app_color.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,14 +14,17 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   final int _tabLength = 4;
-  final int _index = 0;
+  final int _index = 1;
 
   late final List<Widget> _screens = [
+    const CommunityScreen(),
     const ChatScreen(),
   ];
+  
   late final TabController _tabController = TabController(
     length: _tabLength,
     vsync: this,
+    initialIndex: _index,
   );
 
   _onPageChanged(idx) {
@@ -42,26 +46,21 @@ class _MainScreenState extends State<MainScreen>
       child: Scaffold(
         appBar: _appBar(context),
         floatingActionButton: _floatingActionButton(),
-        body: IndexedStack(
-          index: _tabController.index,
-          children: _screens,
-        ),
+        body: _body(),
       ),
     );
   }
 
-  PreferredSizeWidget _appBar(BuildContext context) {
-    return AppBar(
-      title: const Text(
-        "Whatsapp",
-        style: TextStyle(
-          color: AppColor.grey1,
+  PreferredSizeWidget _appBar(BuildContext context) => AppBar(
+        title: const Text(
+          "Whatsapp",
+          style: TextStyle(
+            color: AppColor.grey1,
+          ),
         ),
-      ),
-      bottom: _tabBar(context),
-      actions: _actions(),
-    );
-  }
+        bottom: _tabBar(context),
+        actions: _actions(),
+      );
 
   PreferredSizeWidget _tabBar(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -133,32 +132,33 @@ class _MainScreenState extends State<MainScreen>
     );
   }
 
-  List<Widget> _actions() {
-    return <Widget>[
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.camera_alt_outlined),
-        splashRadius: 20,
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.search_rounded),
-        splashRadius: 20,
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.more_vert_rounded),
-        splashRadius: 20,
-      ),
-    ];
-  }
+  List<Widget> _actions() => <Widget>[
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.camera_alt_outlined),
+          splashRadius: 20,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.search_rounded),
+          splashRadius: 20,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.more_vert_rounded),
+          splashRadius: 20,
+        ),
+      ];
 
-  Widget _floatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () {},
-      child: const Icon(
-        Icons.message_rounded,
-      ),
-    );
-  }
+  Widget _floatingActionButton() => FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(
+          Icons.message_rounded,
+        ),
+      );
+
+  IndexedStack _body() => IndexedStack(
+        index: _tabController.index,
+        children: _screens,
+      );
 }
