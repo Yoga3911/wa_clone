@@ -70,6 +70,7 @@ class ChatTileWidget extends StatelessWidget {
                   const Icon(
                     Icons.volume_off_rounded,
                     color: AppColor.grey1,
+                    size: 20,
                   ),
                 const SizedBox(width: 5),
                 if (chat.total != 0)
