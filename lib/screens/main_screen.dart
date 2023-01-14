@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp/dummy/chats.dart';
+import 'package:whatsapp/dummy/chat.dart';
 import 'package:whatsapp/screens/chat/chat.dart';
 import 'package:whatsapp/screens/community/community.dart';
 import 'package:whatsapp/themes/app_color.dart';
+
+import 'call/call.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,8 +21,10 @@ class _MainScreenState extends State<MainScreen>
   late final List<Widget> _screens = [
     const CommunityScreen(),
     const ChatScreen(),
+    const ChatScreen(),
+    const CallScreen(),
   ];
-  
+
   late final TabController _tabController = TabController(
     length: _tabLength,
     vsync: this,
